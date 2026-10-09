@@ -1,95 +1,80 @@
 "use client";
 
-import React, { useState } from "react";
-import { SKILL_CATEGORIES } from "@/data/portfolio-data";
-import { Terminal, Database, Cpu, Wrench, Binary, Check } from "lucide-react";
+import React from "react";
+import { SKILL_GROUPS } from "@/data/portfolio-data";
+import { Cpu, Terminal, Database, Binary } from "lucide-react";
 
 export default function SkillsSection() {
-  const [activeCategory, setActiveCategory] = useState<number | null>(null);
-
-  const getCategoryIcon = (idx: number) => {
+  const getIcon = (idx: number) => {
     switch (idx) {
       case 0:
-        return Binary;
-      case 1:
         return Cpu;
+      case 1:
+        return Terminal;
       case 2:
-        return Wrench;
-      case 3:
         return Database;
       default:
-        return Terminal;
+        return Binary;
     }
   };
 
   return (
-    <section id="skills" className="py-24 bg-[#0B0C0E] border-t border-white/[0.08] relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="skills" className="py-12 sm:py-14 bg-[#0C0D10] border-b border-white/[0.08]">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6">
+        
         {/* Section Header */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-16 pb-6 border-b border-white/[0.08] gap-4">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between pb-4 mb-6 border-b border-white/[0.08] gap-2">
           <div>
-            <div className="font-mono text-xs text-[#C5FF4A] tracking-widest uppercase mb-2">
-              // 04. TECHNICAL TOOLKIT
+            <div className="font-mono text-xs text-[#C5FF4A] tracking-widest uppercase mb-1">
+              // 01. TECHNICAL TOOLKIT
             </div>
-            <h2 className="font-display font-bold text-3xl sm:text-4xl text-white tracking-tight">
-              Systems & Engineering Stack.
+            <h2 className="font-display font-bold text-2xl sm:text-3xl text-white tracking-tight">
+              Core Capabilities & Stack
             </h2>
           </div>
-          <div className="font-mono text-xs text-[#646A7A]">
-            GROUNDED IN THEORY • BATTLE-TESTED IN CODE
+          <div className="font-mono text-xs text-[#9DA3AF]">
+            PRIORITIZED FOR AI/ML & BACKEND RECRUITING
           </div>
         </div>
 
-        {/* 5 Distinct Grouped Panels */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {SKILL_CATEGORIES.map((cat, idx) => {
-            const Icon = getCategoryIcon(idx);
-            const isHovered = activeCategory === idx;
-
+        {/* 4 Compact Skill Panels */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {SKILL_GROUPS.map((group, idx) => {
+            const Icon = getIcon(idx);
             return (
               <div
                 key={idx}
-                onMouseEnter={() => setActiveCategory(idx)}
-                onMouseLeave={() => setActiveCategory(null)}
-                className={`rounded-2xl bg-[#13161C] border transition-all duration-300 p-6 flex flex-col justify-between ${
-                  isHovered
-                    ? "border-[#C5FF4A]/50 bg-[#161922] shadow-xl shadow-[#C5FF4A]/5"
-                    : "border-white/[0.08]"
-                } ${idx === 4 ? "md:col-span-2 lg:col-span-2" : ""}`}
+                className="p-4 sm:p-5 rounded-xl bg-[#121419] border border-white/[0.07] hover:border-white/[0.15] transition-colors flex flex-col justify-between"
               >
                 <div>
-                  {/* Category Header */}
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="font-mono text-[10px] font-bold px-2 py-0.5 rounded bg-[#181B22] text-[#C5FF4A] border border-white/5">
-                      {cat.badge}
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="flex items-center gap-2">
+                      <Icon className="w-4 h-4 text-[#C5FF4A]" />
+                      <h3 className="font-display font-bold text-sm sm:text-base text-white">
+                        {group.category}
+                      </h3>
+                    </div>
+                    <span className="font-mono text-[10px] px-2 py-0.5 rounded bg-white/[0.04] text-[#C5FF4A] border border-white/5 font-semibold">
+                      {group.priority}
                     </span>
-                    <Icon className="w-4 h-4 text-[#959BAA]" />
                   </div>
 
-                  <h3 className="font-display font-bold text-xl text-white mb-1.5">
-                    {cat.title}
-                  </h3>
-                  <p className="text-xs text-[#959BAA] leading-relaxed mb-6">
-                    {cat.description}
-                  </p>
-                </div>
-
-                {/* Skills Badges */}
-                <div className="pt-4 border-t border-white/[0.06] flex flex-wrap gap-2">
-                  {cat.skills.map((skill, sIdx) => (
-                    <span
-                      key={sIdx}
-                      className="px-3 py-1.5 rounded-lg bg-[#0B0C0E] border border-white/[0.07] text-xs font-mono text-[#D0D4DE] hover:text-[#C5FF4A] hover:border-[#C5FF4A]/30 transition-colors flex items-center gap-1.5"
-                    >
-                      <span className="w-1 h-1 rounded-full bg-[#C5FF4A]/60" />
-                      <span>{skill}</span>
-                    </span>
-                  ))}
+                  <div className="flex flex-wrap gap-1.5 pt-1">
+                    {group.skills.map((skill, sIdx) => (
+                      <span
+                        key={sIdx}
+                        className="px-2.5 py-1 rounded-md bg-[#0C0D10] border border-white/[0.06] text-xs font-mono text-[#D1D5DB] hover:text-[#C5FF4A] hover:border-[#C5FF4A]/30 transition-colors"
+                      >
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </div>
             );
           })}
         </div>
+
       </div>
     </section>
   );

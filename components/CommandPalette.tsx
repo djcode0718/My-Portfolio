@@ -15,7 +15,7 @@ import {
   GraduationCap,
   Sparkles,
 } from "lucide-react";
-import { PERSONAL_INFO, FLAGSHIP_PROJECTS, CATEGORIZED_PROJECTS } from "@/data/portfolio-data";
+import { PERSONAL_INFO, FLAGSHIP_PROJECTS, SECONDARY_PROJECTS } from "@/data/portfolio-data";
 
 interface CommandPaletteProps {
   isOpen: boolean;
@@ -58,7 +58,7 @@ export default function CommandPalette({
     }
   }, [isOpen]);
 
-  const allProjectsList = [...FLAGSHIP_PROJECTS, ...CATEGORIZED_PROJECTS];
+  const allProjectsList = [...FLAGSHIP_PROJECTS, ...SECONDARY_PROJECTS];
 
   const items = [
     // Navigation

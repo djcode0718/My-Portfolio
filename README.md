@@ -1,8 +1,8 @@
-# Sreevedh Jella — Personal Portfolio & Systems Showcase
+# Sreevedh Jella — Portfolio V3: Recruiter-First AI/ML Systems Showcase
 
-A high-performance personal portfolio and engineering case-study showcase built for **Sreevedh Jella**, a final-year B.Tech Computer Science Engineering (AI & ML) student at BVRIT, Narsapur.
+A concise, high-impact personal portfolio built for **Sreevedh Jella**, a final-year B.Tech Computer Science Engineering (AI & ML) student at BVRIT, Narsapur.
 
-Designed with an editorial, dark technical aesthetic (`#0B0C0E` background, `#C5FF4A` electric lime accents, `#F3F3EE` warm white typography) inspired by developer studios and product landing pages.
+Engineered to communicate technical credibility within 5 seconds to startup founders, AI/ML engineering leads, and technical recruiters.
 
 ---
 
@@ -10,98 +10,86 @@ Designed with an editorial, dark technical aesthetic (`#0B0C0E` background, `#C5
 
 - **Framework**: Next.js 16 (App Router with Turbopack)
 - **Language**: TypeScript
-- **Styling**: Tailwind CSS v4 + Vanilla CSS Design Tokens
-- **Typography**: Syne (Headlines), Inter (Body text), JetBrains Mono (Technical annotations)
-- **Icons**: Lucide React + Custom Brand SVGs
-- **Deployment Target**: Vercel (Zero configuration, 100% static prerendered)
+- **Styling**: Tailwind CSS v4 + Refined Graphite & Acid-Lime Design Tokens
+- **Typography**: Google Fonts via `next/font/google` (Syne for display, Inter for body, JetBrains Mono for telemetry)
+- **Icons**: Lucide React + Custom SVG Brand Icons
+- **Deployment**: Vercel (100% static prerendered routes + cached server stats API)
 
 ---
 
-## 🚀 Key Features
+## 🏛️ Information Architecture & Recruiter Narrative
 
-1. **Interactive Hero Section**:
-   - Status badge: `BUILDING THINGS THAT MATTER` with pulse indicator.
-   - Verified profile photograph frame preserving `passport size photo.jpg`.
-   - Measured metrics quick-ticker (`0.80+ RAG Hit Rate`, `0.92 FedSegX Dice`, `250+ LeetCode Solved`, `IEEE Xplore Author`).
-   - Direct CTA navigation and resume access.
+1. **Compact Navigation**:
+   - Monogram `SJ` and candidate identity.
+   - Quick anchors (`Projects`, `Skills`, `Experience`, `Research`, `Contact`).
+   - Direct resume download action.
+   - Command search trigger (⌘K / Ctrl+K).
 
-2. **Global Command Palette (⌘K / Ctrl+K)**:
-   - Full keyboard navigation (Arrow keys, Enter, Escape).
-   - Deep navigation to sections, project case studies, IEEE research publication, profile links, and instant email copy.
+2. **Hero: Professional Identity & Verified Credibility**:
+   - **Primary Title**: **Applied AI / ML Engineer**
+   - **Specializations**: LLMs & RAG · Multimodal AI · Backend Systems
+   - **One-Liner**: Building AI-enabled applications and engineering the systems that make them useful, reliable, and fast.
+   - **Profile Framing**: Clean responsive layout integrating `passport size photo.jpg` with zero overlap.
+   - **Credibility Metric Strip**:
+     - **91%** Crop-Grading Accuracy (Segritech Internship)
+     - **0.80+** Hybrid RAG Hit Rate (CodeBase-Copilot)
+     - **4th / 240** Teams @ Demux 2.0 (MediScanAI)
+     - **IEEE Xplore** Published Author (Sound2Sign)
 
-3. **Curated Engineering Showcase ("Less talk. More things that work.")**:
-   - **Functional Category Filters**: `All Projects`, `AI / ML`, `LLM & RAG`, `Full Stack`, `Research`.
-   - **Featured Top 4 Case Studies**:
-     - **Project 01 — CodeBase-Copilot**: AI Repository Intelligence Platform with 12 workflows, 4-stage hybrid retrieval (dense, BM25, RRF, Cross-Encoder), 0.80+ Hit Rate, 0.60+ MRR, ~0.1s latency, and a 238-test evaluation suite.
-     - **Project 02 — MediScanAI**: Privacy-First Multimodal AI Health Copilot (Demux 2.0 Hackathon 4th/240 teams & 2nd in domain) with text/voice/OCR ingestion and PostgreSQL persistence.
-     - **Project 03 — Sound2Sign**: Hybrid Speech-to-Sign translation motion synthesis published in IEEE Xplore (`DOI: 10.1109/I3CTCON68242.2026.11507164`).
-     - **Project 04 — FedSegX**: Distributed cross-domain federated learning system recovering non-IID collapse (0.92 and 0.80 Dice) with zero raw data transmission over 50 rounds.
-   - **Interactive Architecture & Metrics Modals**: Step-by-step pipeline flows and profiled benchmark breakdowns.
-   - **Secondary Expandable Drawer**: Additional 6 systems (NeuroVera/NeuroTriage, UGC-Ad-Studio, ComicSpoilerDetection Web & Mobile, Insurance LLM Assistant, RazorpayRecoverIQ).
+3. **Technical Toolkit (Positioned Near the Top)**:
+   - Scannable in 5 seconds across 4 prioritized groups:
+     - **AI / ML & LLMs** (Primary Identity): Hybrid RAG (ColBERT/BM25), LlamaIndex, LangGraph, PyTorch, FedProx, OCR & Whisper.
+     - **Backend & Systems** (Major Strength): FastAPI, Python AsyncIO, Docker, Bounded Concurrency, pytest, HMAC Webhooks.
+     - **Databases & Storage**: PostgreSQL (Schema Isolation), FAISS, ChromaDB, Supabase, SQL Optimization.
+     - **Core CS & Foundations**: 250+ LeetCode Solved, OOP, DBMS, OS, Networks, Git.
 
-4. **Experience Timeline**:
-   - Software Development Intern at **Segritech (Tikkly Agro Solutions)**:
-     - 5,000+ produce images processed with OpenCV (91% grading accuracy).
-     - Nationwide web-scraping pipeline collecting 12,000+ temple data points.
-     - Rapido-style booking platform UI prototyped in Figma.
+4. **Flagship Systems (Compact Case Studies)**:
+   - **MediScanAI**: Privacy-First Multimodal AI Health Copilot (Demux 2.0 Hackathon Top 2%, OCR + Whisper + 4-Stage RAG + Air-Gapped Local LLM).
+   - **CodeBase-Copilot**: Enterprise Repository Intelligence Platform (0.80+ Hit Rate, 0.60+ MRR, ~0.1s latency, 238 automated tests, 12 automated workflows).
+   - Includes 5-stage deterministic execution pipeline steppers and deep-dive modal triggers.
 
-5. **Technical Toolkit**:
-   - 5 structured, non-gamified panels (Programming Languages, Core CS, Software Engineering & Infra, Databases, and AI/ML & LLMs).
+5. **Complete Ranked Portfolio (Filterable Grid)**:
+   - Evaluated and ranked by technical depth:
+     - **#03 RecoverIQ (Razorpay)**: Autonomous Revenue Recovery Engine with 7 deterministic zero-trust safety gates and HMAC-SHA256 cryptography.
+     - **#04 Sound2Sign**: Data-Efficient Speech-to-Sign translation using GRUs and linguistic parsing (IEEE Xplore).
+     - **#05 FedSegX**: Cross-domain federated segmentation recovering 0.92 and 0.80 Dice with zero raw data transmission.
+     - **#06 NeuroTriage (NeuroVera)**: Multi-agent brain MRI analysis with LangGraph cyclic verification.
+     - **#07 UGC Ad Studio**: AI-native creative ad generation engine.
+     - **#08 ComicSpoilerApp — Web**: Hybrid vision + NLP spoiler detection with httpOnly JWT authentication.
+     - **#09 Insurance LLM Assistant**: Local LLaMA 3 policy reasoning with deterministic structured outputs.
+     - **#10 ComicSpoilerApp — Mobile**: Cross-platform Flutter client with asynchronous backend bridge.
+   - Filterable in-place across `All Projects`, `LLMs, RAG & Agents`, `Multimodal & Research`, `Computer Vision & ML`, and `Products & Full-Stack`.
 
-6. **Peer-Reviewed Scientific Output**:
-   - Dedicated IEEE Xplore publication spotlight with direct DOI citation resolution.
+6. **Experience & Credibility**:
+   - Software Development Intern at **Segritech (Tikkly Agro Solutions)**: OpenCV defect detection (5,000+ images, 91% accuracy), nationwide scraping (12,000+ locations), Figma prototyping.
+   - Honors: Demux 2.0 Finalist, Promethean '25 Dark Auction Lead, School Sports Captain (25+ medals), BVRIT (CGPA 8.40/10).
 
-7. **Achievements & Verified Profiles**:
-   - 250+ LeetCode solved, Demux 2.0 hackathon, Promethean'25 leadership, School Sports Captain (25+ medals).
-   - Direct links to GitHub, LeetCode, HackerRank, and LinkedIn.
+7. **Scientific Research**:
+   - Feature card for Sound2Sign in IEEE Xplore with direct DOI citation link (`10.1109/I3CTCON68242.2026.11507164`).
 
-8. **Contact & Resume**:
+8. **Verified Coding Profiles & Live Stats**:
+   - Server-side cached statistics endpoint (`/api/profile-stats`) for GitHub (31 public repos) and LeetCode (250+ solved) with static verification fallback.
+
+9. **Frictionless Contact**:
    - One-click copy email button with feedback.
-   - Prefilled `mailto:` client trigger.
-   - Direct download link to `23211a66f8_Sreevedh.pdf` served from `public/`.
+   - Prefilled direct `mailto:` composer.
+   - Resume download link to `public/23211a66f8_Sreevedh.pdf`.
 
 ---
 
 ## 🛠️ Local Development
 
-### Prerequisites
-- Node.js `v20+` or `v22+`
-- npm `10+`
-
-### Installation & Run
-
 ```bash
 # Install dependencies
 npm install
 
-# Start development server
+# Run development server
 npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) to view the site.
 
-### Build Verification
-
 ```bash
-# Run production build
+# Verify production build
 npm run build
 ```
-
----
-
-## ☁️ Free Deployment to Vercel
-
-The portfolio is 100% static and optimized for zero-cost deployment on Vercel:
-
-1. Push your repository to GitHub:
-   ```bash
-   git init
-   git add .
-   git commit -m "feat: world-class portfolio for Sreevedh Jella"
-   git remote add origin https://github.com/djcode0718/my-portfolio.git
-   git push -u origin main
-   ```
-2. Log into [vercel.com](https://vercel.com) and click **"Add New Project"**.
-3. Import your repository.
-4. Vercel will automatically detect **Next.js**. Leave default settings (`npm run build` and Next.js preset).
-5. Click **"Deploy"**. The site will be live on an official `.vercel.app` domain in seconds with automatic HTTPS, edge CDN, and asset caching.

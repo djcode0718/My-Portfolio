@@ -1,11 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Mail,
   Copy,
   Check,
-  ExternalLink,
   FileText,
   ArrowUpRight,
   Terminal,
@@ -15,149 +14,133 @@ import { PERSONAL_INFO } from "@/data/portfolio-data";
 
 export default function ContactSection() {
   const [copied, setCopied] = useState(false);
-  const [year, setYear] = React.useState("2026");
+  const [year, setYear] = useState("2026");
 
-  React.useEffect(() => {
+  useEffect(() => {
     setYear(new Date().getFullYear().toString());
   }, []);
 
   const copyEmail = () => {
     navigator.clipboard.writeText(PERSONAL_INFO.email);
     setCopied(true);
-    setTimeout(() => setCopied(false), 2500);
+    setTimeout(() => setCopied(false), 2000);
   };
 
   const prefilledMailto = `mailto:${PERSONAL_INFO.email}?subject=${encodeURIComponent(
-    "Engineering Inquiry / Opportunity — Sreevedh Jella"
+    "AI/ML Engineering Role — Sreevedh Jella"
   )}&body=${encodeURIComponent(
-    "Hi Sreevedh,\n\nI reviewed your portfolio and project case studies (CodeBase-Copilot, MediScanAI, Sound2Sign, FedSegX). I would love to connect regarding an engineering opportunity / technical collaboration.\n\nBest regards,"
+    "Hi Sreevedh,\n\nI reviewed your portfolio and project case studies (MediScanAI, CodeBase-Copilot, RecoverIQ, Sound2Sign). I'd like to discuss an engineering role with our team.\n\nBest regards,"
   )}`;
 
   return (
-    <section id="contact" className="py-24 bg-[#0B0C0E] border-t border-white/[0.08] relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Main Contact Container */}
-        <div className="rounded-3xl bg-[#13161C] border border-white/[0.08] p-8 sm:p-14 relative overflow-hidden">
-          {/* Subtle grid and accent blur */}
-          <div className="absolute top-0 right-0 w-96 h-96 bg-[#C5FF4A]/[0.03] blur-[100px] rounded-full pointer-events-none" />
-
-          <div className="max-w-3xl space-y-8 relative z-10">
+    <section id="contact" className="py-14 sm:py-16 bg-[#0C0D10]">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6">
+        
+        {/* Contact Container */}
+        <div className="p-6 sm:p-10 rounded-2xl bg-[#121419] border border-white/[0.08] relative overflow-hidden">
+          
+          <div className="max-w-2xl space-y-5">
             <div>
-              <div className="font-mono text-xs text-[#C5FF4A] tracking-widest uppercase mb-3">
-                // 07. INITIATE CONTACT
+              <div className="font-mono text-xs text-[#C5FF4A] tracking-widest uppercase mb-1">
+                // 07. NEXT STEPS & CONTACT
               </div>
-              <h2 className="font-display font-extrabold text-3xl sm:text-5xl text-white tracking-tight leading-tight">
-                Have an interesting problem? <br />
-                <span className="text-[#C5FF4A]">Let&apos;s build something.</span>
+              <h2 className="font-display font-extrabold text-2xl sm:text-3xl text-white tracking-tight">
+                Ready to Discuss Engineering Roles?
               </h2>
-              <p className="text-sm sm:text-base text-[#959BAA] mt-4 leading-relaxed">
-                I am actively seeking software engineering and AI/ML engineering roles where I can
-                design high-throughput retrieval pipelines, hardened APIs, and production systems.
-                Whether you have an opportunity or want to discuss technical architectures, my inbox is open.
+              <p className="text-xs sm:text-sm text-[#D1D5DB] mt-2 leading-relaxed">
+                I am actively seeking Applied AI/ML and Backend Engineering roles.
+                Whether you have an open position or want to discuss technical architectures,
+                reach out directly.
               </p>
             </div>
 
-            {/* Email Action Bar */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
-              {/* Copy Email Button with Feedback */}
+            {/* Action Buttons */}
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 pt-1">
+              {/* Copy Email Button */}
               <button
                 onClick={copyEmail}
-                className="flex items-center justify-between sm:justify-start gap-3 px-5 py-3.5 rounded-xl bg-[#0B0C0E] border border-white/10 hover:border-[#C5FF4A]/50 text-white font-mono text-xs transition-all"
+                className="flex items-center justify-between sm:justify-start gap-2.5 px-4 py-2.5 rounded-lg bg-[#0C0D10] border border-white/10 hover:border-[#C5FF4A]/40 text-white font-mono text-xs transition-colors"
               >
-                <div className="flex items-center gap-2.5">
-                  <Mail className="w-4 h-4 text-[#C5FF4A]" />
+                <div className="flex items-center gap-2">
+                  <Mail className="w-3.5 h-3.5 text-[#C5FF4A]" />
                   <span>{PERSONAL_INFO.email}</span>
                 </div>
-                <div className="flex items-center gap-1.5 px-2 py-1 rounded bg-white/5 text-[10px] text-[#959BAA]">
+                <span className="px-2 py-0.5 rounded bg-white/5 text-[10px] text-[#9DA3AF]">
                   {copied ? (
-                    <>
-                      <Check className="w-3 h-3 text-[#C5FF4A]" />
-                      <span className="text-[#C5FF4A] font-bold">COPIED!</span>
-                    </>
+                    <span className="text-[#C5FF4A] font-bold">COPIED!</span>
                   ) : (
-                    <>
-                      <Copy className="w-3 h-3" />
-                      <span>COPY</span>
-                    </>
+                    <span>COPY</span>
                   )}
-                </div>
+                </span>
               </button>
 
-              {/* Direct Mailto Compose */}
+              {/* Direct Mailto */}
               <a
                 href={prefilledMailto}
-                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-[#C5FF4A] text-[#0B0C0E] font-bold text-xs hover:bg-[#D4FF6B] transition-all shadow-lg shadow-[#C5FF4A]/10"
+                className="inline-flex items-center justify-center gap-1.5 px-5 py-2.5 rounded-lg bg-[#C5FF4A] text-[#0C0D10] font-bold text-xs hover:bg-[#D4FF6B] transition-all shadow-sm"
               >
                 <span>Compose Direct Email</span>
                 <ArrowUpRight className="w-3.5 h-3.5" />
               </a>
 
-              {/* Download Resume */}
+              {/* Resume Download */}
               <a
                 href={PERSONAL_INFO.resumePath}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl bg-[#181B22] hover:bg-[#202530] border border-white/10 text-white text-xs font-semibold transition-colors"
+                className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-lg bg-[#181B22] hover:bg-white/[0.08] border border-white/10 text-white text-xs font-semibold transition-colors"
               >
-                <FileText className="w-4 h-4 text-[#C5FF4A]" />
-                <span>Resume PDF</span>
+                <FileText className="w-3.5 h-3.5 text-[#C5FF4A]" />
+                <span>Resume (PDF)</span>
               </a>
             </div>
 
-            {/* Social Channels */}
-            <div className="pt-6 border-t border-white/[0.08] flex flex-wrap items-center gap-4 text-xs font-mono text-[#959BAA]">
-              <span>CONNECT DIRECTLY:</span>
+            {/* Quick Links */}
+            <div className="pt-3 border-t border-white/[0.06] flex items-center gap-4 text-xs font-mono text-[#9DA3AF]">
+              <span>DIRECT PROFILES:</span>
               <a
                 href={PERSONAL_INFO.socials.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 text-white hover:text-[#C5FF4A] transition-colors"
+                className="text-white hover:text-[#C5FF4A] transition-colors"
               >
-                <LinkedinIcon className="w-3.5 h-3.5" />
-                <span>LinkedIn</span>
+                LinkedIn
               </a>
               <span className="text-white/20">•</span>
               <a
                 href={PERSONAL_INFO.socials.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 text-white hover:text-[#C5FF4A] transition-colors"
+                className="text-white hover:text-[#C5FF4A] transition-colors"
               >
-                <GithubIcon className="w-3.5 h-3.5" />
-                <span>GitHub</span>
+                GitHub
               </a>
               <span className="text-white/20">•</span>
               <a
                 href={PERSONAL_INFO.socials.leetcode}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 text-white hover:text-[#C5FF4A] transition-colors"
+                className="text-white hover:text-[#C5FF4A] transition-colors"
               >
-                <Terminal className="w-3.5 h-3.5" />
-                <span>LeetCode</span>
+                LeetCode
               </a>
             </div>
           </div>
+
         </div>
 
-        {/* Global Footer */}
-        <footer className="mt-20 pt-8 border-t border-white/[0.06] flex flex-col sm:flex-row items-center justify-between text-xs font-mono text-[#646A7A] gap-4">
-          <div className="flex items-center gap-3">
-            <span className="w-2 h-2 rounded-full bg-[#C5FF4A]"></span>
-            <span className="text-[#959BAA]">
-              © {year} Sreevedh Jella. Built with Next.js, TypeScript & Tailwind.
-            </span>
+        {/* Global Clean Footer */}
+        <footer className="mt-12 pt-6 border-t border-white/[0.06] flex flex-col sm:flex-row items-center justify-between text-xs font-mono text-[#6B7280] gap-3">
+          <div className="flex items-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#C5FF4A]"></span>
+            <span>© {year} Sreevedh Jella • Applied AI & ML Engineer</span>
           </div>
 
-          <div className="flex items-center gap-4">
-            <a
-              href="#"
-              className="hover:text-white transition-colors"
-            >
-              Back to Top ↑
-            </a>
-          </div>
+          <a href="#" className="hover:text-white transition-colors">
+            Back to Top ↑
+          </a>
         </footer>
+
       </div>
     </section>
   );

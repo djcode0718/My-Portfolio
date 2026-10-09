@@ -4,22 +4,22 @@ import React, { useState } from "react";
 import Navbar from "@/components/Navbar";
 import CommandPalette from "@/components/CommandPalette";
 import Hero from "@/components/Hero";
+import SkillsSection from "@/components/SkillsSection";
 import FlagshipShowcase from "@/components/FlagshipShowcase";
 import CategorizedProjectsSection from "@/components/CategorizedProjectsSection";
 import ExperienceSection from "@/components/ExperienceSection";
-import SkillsSection from "@/components/SkillsSection";
 import ResearchSection from "@/components/ResearchSection";
 import AchievementsSection from "@/components/AchievementsSection";
 import ContactSection from "@/components/ContactSection";
 import ProjectModal, { ModalProject } from "@/components/ProjectModal";
-import { FLAGSHIP_PROJECTS, CATEGORIZED_PROJECTS } from "@/data/portfolio-data";
+import { FLAGSHIP_PROJECTS, SECONDARY_PROJECTS } from "@/data/portfolio-data";
 
 export default function Home() {
   const [commandPaletteOpen, setCommandPaletteOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState<ModalProject | null>(null);
 
   const handleSelectProjectId = (id: string) => {
-    const all = [...FLAGSHIP_PROJECTS, ...CATEGORIZED_PROJECTS];
+    const all = [...FLAGSHIP_PROJECTS, ...SECONDARY_PROJECTS];
     const found = all.find((p) => p.id === id);
     if (found) {
       setSelectedProject(found);
@@ -27,42 +27,42 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen bg-[#0B0C0E] text-[#F3F3EE] selection:bg-[#C5FF4A] selection:text-[#0B0C0E] relative overflow-x-hidden">
-      {/* Navbar with quick links and command palette trigger */}
+    <main className="min-h-screen bg-[#0C0D10] text-[#F1F1EB] selection:bg-[#C5FF4A] selection:text-[#0C0D10] relative overflow-x-hidden">
+      {/* 1. Compact Navbar with Quick Anchors & Resume Action */}
       <Navbar onOpenCommandPalette={() => setCommandPaletteOpen(true)} />
 
-      {/* Global Interactive Command Palette (⌘K / Ctrl+K) */}
+      {/* Global Interactive Command Palette (⌘K) */}
       <CommandPalette
         isOpen={commandPaletteOpen}
         onClose={() => setCommandPaletteOpen(false)}
         onSelectProject={handleSelectProjectId}
       />
 
-      {/* 1. Hero Section: Applied AI/ML Positioning & Bulletproof Responsive Layout */}
+      {/* 2. Hero: Applied AI/ML Identity, Specialization & Verified Credibility Strip */}
       <Hero />
 
-      {/* 2. Flagship Projects: CodeBase-Copilot & MediScanAI deep-dive case studies */}
-      <FlagshipShowcase />
-
-      {/* 3. Categorized Projects: Filterable multi-tagged repository grid */}
-      <CategorizedProjectsSection onSelectProject={(project) => setSelectedProject(project)} />
-
-      {/* 4. Professional Experience: Segritech software development intern */}
-      <ExperienceSection />
-
-      {/* 5. Technical Toolkit: 5 grouped panels across languages, CS, backend, DB & AI/ML */}
+      {/* 3. Technical Toolkit: Positioned Immediately Near the Top for Rapid 5-Second Scanning */}
       <SkillsSection />
 
-      {/* 6. Research Publication: Sound2Sign IEEE Xplore publication & DOI */}
+      {/* 4. Flagship Case Studies: Compact, High-Impact MediScanAI & CodeBase-Copilot */}
+      <FlagshipShowcase onSelectProject={(project) => setSelectedProject(project)} />
+
+      {/* 5. Complete Ranked Portfolio: Instant Multi-Tagged Filtering (RazorpayRecoverIQ Ranked #1) */}
+      <CategorizedProjectsSection onSelectProject={(project) => setSelectedProject(project)} />
+
+      {/* 6. Experience & Achievements: Segritech Internship, Hackathons & Honors in One Unified Flow */}
+      <ExperienceSection />
+
+      {/* 7. Research Publication: Sound2Sign IEEE Xplore Paper with DOI Resolution */}
       <ResearchSection />
 
-      {/* 7. Achievements & Coding Profiles: Live/verified LeetCode, GitHub, HackerRank metrics */}
+      {/* 8. Verified Coding Profiles: LeetCode (250+), GitHub, HackerRank with Server-Side Stats */}
       <AchievementsSection />
 
-      {/* 8. Contact Section: Prefilled mailto, copy email, resume download & footer */}
+      {/* 9. Contact & Next Steps: Frictionless Copy Email, Direct Mailto & Resume Download */}
       <ContactSection />
 
-      {/* Detailed Architecture & Evaluation Modal */}
+      {/* Comprehensive System Architecture & Deep Dive Modal */}
       <ProjectModal
         project={selectedProject}
         onClose={() => setSelectedProject(null)}
