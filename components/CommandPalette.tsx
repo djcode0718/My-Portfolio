@@ -15,7 +15,7 @@ import {
   GraduationCap,
   Sparkles,
 } from "lucide-react";
-import { PERSONAL_INFO, FEATURED_PROJECTS } from "@/data/portfolio-data";
+import { PERSONAL_INFO, FLAGSHIP_PROJECTS, CATEGORIZED_PROJECTS } from "@/data/portfolio-data";
 
 interface CommandPaletteProps {
   isOpen: boolean;
@@ -39,8 +39,6 @@ export default function CommandPalette({
         e.preventDefault();
         if (isOpen) {
           onClose();
-        } else {
-          // Trigger open via parent or window event
         }
       } else if (e.key === "Escape" && isOpen) {
         e.preventDefault();
@@ -60,12 +58,24 @@ export default function CommandPalette({
     }
   }, [isOpen]);
 
+  const allProjectsList = [...FLAGSHIP_PROJECTS, ...CATEGORIZED_PROJECTS];
+
   const items = [
     // Navigation
     {
+      id: "nav-flagship",
+      category: "Navigation",
+      title: "Jump to Flagship Case Studies",
+      icon: FolderGit2,
+      action: () => {
+        document.getElementById("flagship")?.scrollIntoView({ behavior: "smooth" });
+        onClose();
+      },
+    },
+    {
       id: "nav-projects",
       category: "Navigation",
-      title: "Jump to Featured Projects",
+      title: "Jump to Categorized Projects",
       icon: FolderGit2,
       action: () => {
         document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
@@ -113,7 +123,7 @@ export default function CommandPalette({
       },
     },
     // Projects
-    ...FEATURED_PROJECTS.map((proj) => ({
+    ...allProjectsList.map((proj) => ({
       id: `proj-${proj.id}`,
       category: "Project Case Studies",
       title: `${proj.title} — ${proj.subtitle}`,
@@ -122,7 +132,7 @@ export default function CommandPalette({
         if (onSelectProject) {
           onSelectProject(proj.id);
         } else {
-          document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
+          document.getElementById(proj.id === "codebase-copilot" || proj.id === "mediscan-ai" ? "flagship" : "projects")?.scrollIntoView({ behavior: "smooth" });
         }
         onClose();
       },

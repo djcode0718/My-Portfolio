@@ -1,23 +1,50 @@
-export interface Project {
+export type ProjectCategory =
+  | "All Projects"
+  | "LLM, RAG & AI Agents"
+  | "Computer Vision & Applied ML"
+  | "Multimodal AI & Research"
+  | "AI Products & Full-Stack Applications";
+
+export const PROJECT_CATEGORIES: ProjectCategory[] = [
+  "All Projects",
+  "LLM, RAG & AI Agents",
+  "Computer Vision & Applied ML",
+  "Multimodal AI & Research",
+  "AI Products & Full-Stack Applications",
+];
+
+export interface FlagshipProject {
+  id: string;
+  badge: string;
+  number: string;
+  title: string;
+  subtitle: string;
+  role: string;
+  githubUrl: string;
+  award?: string;
+  summary: string;
+  coreProblem: string;
+  architecturalSolution: string;
+  architectureSteps: { title: string; desc: string; tag: string }[];
+  metrics: { label: string; value: string; note: string }[];
+  keyChallenges: string[];
+  techStack: string[];
+}
+
+export interface CategorizedProject {
   id: string;
   number: string;
   title: string;
   subtitle: string;
-  category: string;
-  filterCategories: Array<"All Projects" | "AI / ML" | "LLM & RAG" | "Full Stack" | "Research">;
+  categories: ProjectCategory[];
   githubUrl: string;
   paperUrl?: string;
   doi?: string;
-  award?: string;
   description: string;
   keyPoints: string[];
   metrics?: { label: string; value: string; note?: string }[];
   techStack: string[];
-  architectureType: "rag-pipeline" | "multimodal-health" | "motion-gru" | "federated" | "agentic" | "standard";
-  architectureDetails?: {
-    diagramSteps: { title: string; desc: string; tag: string }[];
-    technicalHighlights: string[];
-  };
+  architectureType: "rag-pipeline" | "multimodal-health" | "motion-gru" | "federated" | "agentic" | "vision-nlp" | "mobile" | "fintech";
 }
 
 export interface ExperienceItem {
@@ -48,8 +75,9 @@ export interface AchievementItem {
 
 export const PERSONAL_INFO = {
   name: "Sreevedh Jella",
-  tagline: "I build intelligent systems and software that solve real problems.",
-  statusText: "BUILDING THINGS THAT MATTER",
+  primaryTitle: "Applied AI / ML Engineer",
+  tagline: "I build production-grade LLM architectures, hybrid retrieval engines, multimodal systems, and hardened backends.",
+  statusText: "AVAILABLE FOR AI/ML & SOFTWARE ROLES",
   education: {
     institution: "BVRIT, Narsapur",
     degree: "B.Tech in Computer Science Engineering (AI & ML)",
@@ -68,198 +96,209 @@ export const PERSONAL_INFO = {
     hackerrank: "https://www.hackerrank.com/profile/23211a66f8",
   },
   summary:
-    "Final-year Computer Science Engineering (AI & ML) student at BVRIT with deep hands-on expertise building hybrid retrieval engines, multimodal AI pipelines, federated learning systems, and hardened backend architectures.",
-  focusAreas: [
-    "Hybrid RAG Architectures & Dense/Sparse Fusion",
-    "Production-Grade FastAPI & Backend Systems",
-    "Multimodal Pipelines (Vision, OCR, Audio & LLMs)",
-    "Distributed & Federated Learning Systems",
-    "Empirical System Evaluation & Benchmarking",
+    "Final-year Computer Science Engineering (AI & ML) student with proven capability in designing evaluated retrieval pipelines, multimodal AI backends, distributed federated systems, and robust REST APIs.",
+  competencies: [
+    {
+      label: "Primary Focus",
+      title: "Applied AI & ML Systems",
+      desc: "Dense & sparse hybrid retrieval, Cross-Encoder reranking, vector spaces, and empirical evaluation.",
+    },
+    {
+      label: "Supporting Strength",
+      title: "LLM Systems & RAG",
+      desc: "LlamaIndex, ColBERT, BM25, agentic workflows, prompt-injection defense, and local inference.",
+    },
+    {
+      label: "Engineering Backbone",
+      title: "Backend & Systems",
+      desc: "FastAPI, PostgreSQL schema isolation, Docker, concurrency queues, and automated test suites.",
+    },
+    {
+      label: "Execution",
+      title: "Full-Stack Applications",
+      desc: "Translating ML pipelines into accessible web/mobile tools with low latency and clean UX.",
+    },
   ],
 };
 
-export const FEATURED_PROJECTS: Project[] = [
+export const FLAGSHIP_PROJECTS: FlagshipProject[] = [
   {
     id: "codebase-copilot",
+    badge: "FLAGSHIP CASE STUDY // 01",
     number: "01",
     title: "CodeBase-Copilot",
-    subtitle: "Enterprise-Grade Repository Intelligence Platform",
-    category: "AI Engineering / Developer Tools",
-    filterCategories: ["AI / ML", "LLM & RAG", "Full Stack"],
+    subtitle: "Enterprise-Grade Repository Intelligence & Digital Twin Platform",
+    role: "Lead Systems Architect & ML Engineer",
     githubUrl: "https://github.com/djcode0718/Codebase-Copilot",
-    description:
-      "A comprehensive digital-twin repository intelligence system that indexes, models, and interrogates complex codebases. Combines 4-stage hybrid retrieval with 12 automated engineering workflows for architecture discovery, security audits, and technical-debt identification.",
-    keyPoints: [
-      "Indexes and analyzes entire software repositories with AST-aware code partitioning and cross-file symbol graphs.",
-      "Supports 12 automated workflows: automated architecture diagrams, security vulnerability scans, dead-code analysis, and technical debt scoring.",
-      "Engineered hybrid retrieval pipeline uniting dense vector embeddings, BM25 keyword matching, Reciprocal Rank Fusion (RRF), and Cross-Encoder reranking.",
-      "Profiled benchmark performance: 0.80+ Hit Rate, 0.60+ MRR, and ~0.1s baseline retrieval latency across test sets.",
-      "Robust 238-test automated evaluation suite validating API routing, token persistence, and LLM evaluation criteria (faithfulness, relevancy, latency).",
+    summary:
+      "An enterprise repository intelligence platform that indexes, diagrams, and interrogates complex software codebases. Designed to overcome naive RAG limitations through AST-aware partitioning and a 4-stage hybrid retrieval engine.",
+    coreProblem:
+      "Naive semantic search fails on complex software repositories because code requires preserving Abstract Syntax Tree (AST) boundaries, specialized programming language keywords, and cross-file symbol references that off-the-shelf vector models obscure.",
+    architecturalSolution:
+      "Engineered an AST-partitioning ingestion pipeline coupled with a 4-stage hybrid retrieval engine uniting dense vector embeddings (ColBERT/ChromaDB), sparse inverted indices (BM25), Reciprocal Rank Fusion (RRF), and Cross-Encoder reranking. This powers 12 automated engineering workflows (architecture discovery, security scans, technical debt audits) through LlamaIndex agents.",
+    architectureSteps: [
+      {
+        title: "AST-Aware Parsing",
+        desc: "Ingests repository files, constructs dependency symbol graphs, and chunks code along function and class boundaries rather than naive character limits.",
+        tag: "Ingest",
+      },
+      {
+        title: "Dual-Space Indexing",
+        desc: "Builds dense semantic representations with ColBERT while simultaneously maintaining an inverted lexical index using BM25.",
+        tag: "Dense + Sparse",
+      },
+      {
+        title: "Reciprocal Rank Fusion",
+        desc: "Blends dense semantic top-K and sparse keyword matches via reciprocal ranking, balancing conceptual intent with exact symbol names.",
+        tag: "RRF Fusion",
+      },
+      {
+        title: "Cross-Encoder Reranking",
+        desc: "Applies a transformer cross-encoder over the fused candidates to compute fine-grained relevance logits, filtering out irrelevant chunks.",
+        tag: "Rerank",
+      },
+      {
+        title: "Multi-Agent Synthesis",
+        desc: "Feeds prioritized contexts into 12 automated workflows generating Mermaid diagrams, security reviews, and technical-debt metrics.",
+        tag: "Synthesis",
+      },
     ],
     metrics: [
-      { label: "Hit Rate", value: "0.80+", note: "Across evaluation queries" },
+      { label: "Hit Rate", value: "0.80+", note: "Across evaluated benchmark queries" },
       { label: "MRR", value: "0.60+", note: "Mean Reciprocal Rank" },
-      { label: "Retrieval Latency", value: "~0.1s", note: "Baseline retrieval response" },
-      { label: "Automated Tests", value: "238", note: "Full test suite coverage" },
-      { label: "Workflows", value: "12", note: "Automated intelligence pipelines" },
+      { label: "Retrieval Latency", value: "~0.1s", note: "Baseline retrieval response time" },
+      { label: "Automated Tests", value: "238", note: "Comprehensive unit, API & RAG test suite" },
     ],
-    techStack: ["Python", "FastAPI", "LlamaIndex", "ColBERT", "BM25", "ChromaDB", "Supabase", "Docker"],
-    architectureType: "rag-pipeline",
-    architectureDetails: {
-      diagramSteps: [
-        { title: "Repo Ingestion", desc: "Clones target repo, parses AST, and constructs file-dependency graphs.", tag: "Input" },
-        { title: "Dual Embedding", desc: "Generates ColBERT/dense embeddings alongside sparse inverted BM25 indices.", tag: "Index" },
-        { title: "Reciprocal Rank Fusion", desc: "Fuses dense semantic top-K and sparse lexical hits using reciprocal scoring.", tag: "RRF" },
-        { title: "Cross-Encoder Rerank", desc: "Scores joint query-chunk pairs with cross-attention to filter irrelevant nodes.", tag: "Rerank" },
-        { title: "LlamaIndex Synthesis", desc: "Feeds prioritized contexts into 12 distinct analytical workflow agents.", tag: "Output" },
-      ],
-      technicalHighlights: [
-        "Eliminates naive chunk truncation by respecting programming language AST boundaries.",
-        "RRF mitigates vocabulary mismatch while preserving specialized symbol matching.",
-        "Automated evaluation validates faithfulness and prevents LLM hallucination on codebase queries.",
-      ],
-    },
+    keyChallenges: [
+      "Mitigated token truncation by respecting programming language AST structures.",
+      "Balanced exact symbol lookup (e.g., function signatures) against conceptual architectural queries via RRF.",
+      "Constructed a 238-test evaluation suite validating routing, token persistence, faithfulness, relevancy, and retrieval latency.",
+    ],
+    techStack: ["Python", "FastAPI", "LlamaIndex", "ColBERT", "BM25", "ChromaDB", "Supabase", "Docker", "PyTest"],
   },
   {
     id: "mediscan-ai",
+    badge: "FLAGSHIP CASE STUDY // 02",
     number: "02",
     title: "MediScanAI",
     subtitle: "Privacy-First Multimodal AI Health Copilot",
-    category: "Multimodal AI / Healthcare",
-    filterCategories: ["AI / ML", "LLM & RAG", "Full Stack"],
+    role: "Full-Stack AI Engineer",
     githubUrl: "https://github.com/djcode0718/MediscanAI",
-    award: "Placed 4th / 240 teams (2nd in domain) at Demux 2.0 National Hackathon",
-    description:
-      "A privacy-centric multimodal medical assistant processing patient symptoms through text, audio recordings, and medicine package imagery to generate clinically grounded insight summaries with zero third-party data leakage.",
-    keyPoints: [
-      "Multimodal ingestion: handles clinical queries via text chat, Whisper speech-to-text, and OCR text extraction from medicine packaging.",
-      "Engineered a 4-stage retrieval pipeline: FAISS semantic search, BM25 keyword matching, Reciprocal Rank Fusion, and Cross-Encoder reranking.",
-      "PostgreSQL persistence backed with strict schema isolation for user profiles, clinical analyses, and audit logs.",
-      "Production-hardened security: JWT auth, bcrypt password hashing, input validation, strict rate limiting, bounded ML concurrency, and prompt-injection defense layers.",
-      "Local LLM inference guarantees data sovereignty and strict patient confidentiality.",
+    award: "Placed 4th out of 240 teams (2nd in domain) at Demux 2.0 National Hackathon",
+    summary:
+      "A privacy-first clinical assistant processing patient symptoms across text, voice, and medicine packaging photos into structured consultation briefings using local LLM inference and a 4-stage hybrid retrieval pipeline.",
+    coreProblem:
+      "Patients describe clinical issues across diverse modalities (a photograph of medicine blister strips, voice descriptions of symptoms, or text logs). Sending raw health data to external cloud APIs compromises patient confidentiality, while single-modality tools fail to cross-reference drug contraindications.",
+    architecturalSolution:
+      "Architected an air-gapped multimodal pipeline utilizing Tesseract OCR for pharmaceutical packaging, Whisper for voice transcription, and a 4-stage retrieval engine (FAISS semantic search + BM25 keyword matching + RRF + Cross-Encoder reranking) backed by local LLM inference and PostgreSQL persistence.",
+    architectureSteps: [
+      {
+        title: "Multimodal Ingestion",
+        desc: "Accepts prescription blister-pack imagery, recorded speech audio, and typed symptom journals.",
+        tag: "Input Channels",
+      },
+      {
+        title: "Feature Extraction",
+        desc: "Runs OCR to extract pharmaceutical dosage/ingredients and Whisper STT for clinical audio transcription.",
+        tag: "Vision & Audio",
+      },
+      {
+        title: "Hybrid Knowledge Retrieval",
+        desc: "Queries FAISS vector stores alongside BM25 indices indexed with verified pharmacological literature.",
+        tag: "FAISS + BM25",
+      },
+      {
+        title: "Cross-Encoder Filter",
+        desc: "Reranks retrieved drug interactions and clinical contraindications to isolate statistically significant context.",
+        tag: "Cross-Attention",
+      },
+      {
+        title: "Local LLM Synthesis",
+        desc: "Local inference produces structured doctor-style consultation notes with strict non-diagnostic disclaimers.",
+        tag: "Private LLM",
+      },
     ],
     metrics: [
-      { label: "Hackathon Standing", value: "Top 2%", note: "4th / 240 Teams (2nd Domain)" },
-      { label: "Modalities", value: "3", note: "Text, Voice & Medicine Images" },
-      { label: "Retrieval Stages", value: "4", note: "FAISS + BM25 + RRF + Cross-Encoder" },
-      { label: "Security", value: "Air-gapped", note: "Local LLM & zero raw data sharing" },
+      { label: "Hackathon Standing", value: "Top 2%", note: "4th / 240 Teams (2nd in Domain) @ Demux 2.0" },
+      { label: "Modalities", value: "3", note: "Text, Whisper Voice & Packaging OCR" },
+      { label: "Retrieval Pipeline", value: "4-Stage", note: "FAISS + BM25 + RRF + Cross-Encoder" },
+      { label: "Data Privacy", value: "Local", note: "Zero external cloud LLM leakage" },
     ],
-    techStack: ["FastAPI", "FAISS", "BM25", "Docker", "PostgreSQL", "React", "Whisper", "Tesseract OCR"],
-    architectureType: "multimodal-health",
-    architectureDetails: {
-      diagramSteps: [
-        { title: "Multimodal Ingest", desc: "Accepts prescription photos, spoken complaints, or typed symptom history.", tag: "Ingest" },
-        { title: "Feature Extraction", desc: "Runs OCR for pharmaceutical packaging and Whisper for audio transcription.", tag: "Perception" },
-        { title: "Hybrid Knowledge Match", desc: "Queries FAISS vector store & BM25 indices across verified medical literature.", tag: "Retrieval" },
-        { title: "Cross-Encoder Filter", desc: "Selects the most statistically relevant clinical contraindications.", tag: "Rerank" },
-        { title: "Local LLM Synthesis", desc: "Produces structured doctor-style consultation summary with audit trails.", tag: "Clinical View" },
-      ],
-      technicalHighlights: [
-        "Explicit non-diagnostic disclaimer: acts as a preparation aid, never replacing physician advice.",
-        "Bounded concurrency queues prevent GPU memory overflow during concurrent OCR & inference requests.",
-        "Prompt-injection filters strip malicious clinical prompt manipulation attempts.",
-      ],
-    },
+    keyChallenges: [
+      "Hardened backend with bounded concurrency queues to prevent GPU out-of-memory crashes during simultaneous OCR and LLM inference.",
+      "Implemented PostgreSQL persistence with strict schema isolation for user profiles, clinical records, and immutable audit logs.",
+      "Integrated prompt-injection sanitization to prevent adversarial inputs from overriding clinical safety protocols.",
+    ],
+    techStack: ["FastAPI", "FAISS", "BM25", "Docker", "PostgreSQL", "React", "Whisper", "Tesseract OCR", "PyTorch"],
   },
+];
+
+export const CATEGORIZED_PROJECTS: CategorizedProject[] = [
   {
     id: "sound2sign",
     number: "03",
     title: "Sound2Sign",
     subtitle: "Hybrid Motion Synthesis for Speech-to-Sign Translation",
-    category: "AI Research / Accessibility",
-    filterCategories: ["AI / ML", "Research"],
+    categories: ["Multimodal AI & Research", "Computer Vision & Applied ML"],
     githubUrl: "https://github.com/djcode0718/Sound2Sign",
     paperUrl: "https://doi.org/10.1109/I3CTCON68242.2026.11507164",
     doi: "10.1109/I3CTCON68242.2026.11507164",
     description:
-      "A novel, data-efficient AI synthesis framework converting spoken or written English into fluid, biologically coherent sign language skeletal animations without requiring massive motion-capture datasets.",
+      "A data-efficient AI synthesis framework converting English speech and text into fluid sign language skeletal animations without requiring massive motion-capture datasets. Published in IEEE Xplore (I3CTCON 2026).",
     keyPoints: [
-      "Authored research paper published in IEEE Xplore: 'Hybrid Motion Synthesis for Speech-to-Sign Translation using Deterministic Linguistic Parsing & GRUs' (I3CTCON 2026).",
-      "Overcomes deep learning data scarcity by fusing deterministic grammatical parsing with dataset-driven motion retrieval.",
-      "Employs Recurrent Gated Units (GRUs) to model dynamic co-articulation and biological transitions between distinct sign lemmas.",
-      "Integrates cosine interpolation curves for biomechanical velocity smoothing and non-manual facial marker synthesis.",
-      "Runs efficiently on consumer hardware without massive 3D studio recording prerequisites.",
+      "Peer-reviewed academic research published in IEEE Xplore (DOI: 10.1109/I3CTCON68242.2026.11507164).",
+      "Combines deterministic grammatical parsing with dataset-driven keypose retrieval to resolve extreme data scarcity.",
+      "Employs Gated Recurrent Units (GRUs) to model dynamic co-articulation and continuous joint trajectories.",
+      "Integrates cosine interpolation velocity damping and dedicated non-manual facial expression markers.",
     ],
     metrics: [
       { label: "Publication", value: "IEEE Xplore", note: "I3CTCON 2026 Peer-Reviewed" },
-      { label: "DOI", value: "10.1109", note: "Verified IEEE Citation" },
+      { label: "DOI", value: "10.1109", note: "10.1109/I3CTCON68242.2026.11507164" },
       { label: "Architecture", value: "Hybrid", note: "Grammar Parser + GRU + Cosine Interp" },
-      { label: "Data Efficiency", value: "High", note: "Operates with sparse motion datasets" },
     ],
-    techStack: ["PyTorch", "Python", "GRU Networks", "Linguistic NLP", "Biomechanical Kinematics", "Blender/3D"],
+    techStack: ["PyTorch", "Python", "GRU Networks", "Linguistic NLP", "Biomechanical Kinematics"],
     architectureType: "motion-gru",
-    architectureDetails: {
-      diagramSteps: [
-        { title: "Speech / Text Input", desc: "Converts spoken English into normalized text tokens via acoustic modeling.", tag: "Input" },
-        { title: "Grammar Re-ordering", desc: "Deterministic parser translates English syntax into Sign Language gloss grammar.", tag: "Parsing" },
-        { title: "Keypose Retrieval", desc: "Fetches canonical skeletal sign tokens from motion dictionary.", tag: "Lookup" },
-        { title: "GRU Transition Engine", desc: "Predicts continuous joint trajectory vectors connecting discrete signs.", tag: "Neural GRU" },
-        { title: "Cosine Smoothing", desc: "Eliminates joint jitter via cosine velocity damping for realistic visual playback.", tag: "Render" },
-      ],
-      technicalHighlights: [
-        "Peer-reviewed academic research published with IEEE DOI indexation.",
-        "Addresses non-manual markers (facial cues and head tilts) crucial for sign syntax.",
-        "Demonstrates order-of-magnitude reduction in required training samples compared to end-to-end models.",
-      ],
-    },
   },
   {
     id: "fedseg-x",
     number: "04",
     title: "FedSegX",
     subtitle: "Cross-Domain Federated Segmentation Engine",
-    category: "Federated Learning / Computer Vision",
-    filterCategories: ["AI / ML", "Research"],
+    categories: ["Computer Vision & Applied ML", "Multimodal AI & Research"],
     githubUrl: "https://github.com/djcode0718/FedSegX",
     description:
-      "A distributed federated learning system that coordinates collaborative model training between two disparate visual domains (camouflaged object detection and medical polyp segmentation) without ever exchanging raw image data.",
+      "A distributed federated learning system coordinating collaborative segmentation between two distinct visual domains (camouflaged object detection and medical polyps) without exchanging raw image data.",
     keyPoints: [
-      "Addresses catastrophic cross-domain collapse: single-domain baselines saw Dice scores plunge from 0.97 to 0.15 and 0.82 to 0.22 when evaluated across domains.",
-      "FedProx proximal aggregation recovered cross-domain Dice scores back to 0.92 and 0.80, stabilizing non-IID client drift.",
-      "Engineered dual-head PVTv2-B2 backbone architecture featuring auxiliary edge supervision for boundary-critical segmentation.",
-      "Implemented a strict manifest-tracked data-split protocol guaranteeing mathematical zero data leakage over 50 federated rounds.",
-      "Built with PyTorch, providing privacy-preserving multi-institutional collaborative training benchmarks.",
+      "Diagnosed cross-domain collapse: single-domain baselines dropped from 0.97 to 0.15 and 0.82 to 0.22 Dice.",
+      "Recovered Dice scores to 0.92 and 0.80 via FedProx proximal aggregation to stabilize non-IID client drift.",
+      "Dual-head PVTv2-B2 architecture with auxiliary edge supervision for boundary-critical segmentation.",
+      "Manifest-tracked data-split protocol guaranteeing mathematical zero data leakage across 50 federated rounds.",
     ],
     metrics: [
       { label: "Domain 1 Recovery", value: "0.92 Dice", note: "Recovered from 0.15 collapse" },
       { label: "Domain 2 Recovery", value: "0.80 Dice", note: "Recovered from 0.22 collapse" },
-      { label: "Federated Rounds", value: "50", note: "Zero leakage manifest verified" },
-      { label: "Backbone", value: "PVTv2-B2", note: "Dual-head with auxiliary edge heads" },
+      { label: "Federated Rounds", value: "50", note: "Manifest-tracked zero leakage" },
     ],
-    techStack: ["PyTorch", "FedProx", "PVTv2-B2", "Computer Vision", "Distributed Systems", "NumPy"],
+    techStack: ["PyTorch", "FedProx", "PVTv2-B2", "Computer Vision", "Distributed Systems"],
     architectureType: "federated",
-    architectureDetails: {
-      diagramSteps: [
-        { title: "Decentralized Nodes", desc: "Client A (COD10K Camouflaged) and Client B (Medical Polyps) hold private data.", tag: "Clients" },
-        { title: "Local PVTv2 Training", desc: "Clients compute gradient updates with proximal penalty term against global drift.", tag: "Local Loss" },
-        { title: "Weight Aggregation", desc: "Coordinates FedProx parameter consolidation on central server with zero raw data.", tag: "FedProx" },
-        { title: "Edge-Supervised Head", desc: "Shared dual-head models learn generalized boundary representations.", tag: "Global Model" },
-        { title: "Non-IID Convergence", desc: "Recovers cross-domain segmentation fidelity across 50 discrete communication rounds.", tag: "Results" },
-      ],
-      technicalHighlights: [
-        "Proximal penalty prevents local divergence caused by drastic domain shifts.",
-        "Auxiliary edge heads force attention on structural contours common to both domains.",
-        "Zero data transmission fulfills strict HIPAA/GDPR clinical privacy prerequisites.",
-      ],
-    },
   },
-];
-
-export const SECONDARY_PROJECTS: Project[] = [
   {
     id: "neuro-vera",
     number: "05",
     title: "NeuroTriage (NeuroVera)",
     subtitle: "Multi-Agent Brain MRI Analysis & Clinical Routing",
-    category: "Medical AI / Agentic Systems",
-    filterCategories: ["AI / ML", "Full Stack"],
+    categories: ["LLM, RAG & AI Agents", "Computer Vision & Applied ML", "AI Products & Full-Stack Applications"],
     githubUrl: "https://github.com/djcode0718/NeuroVera",
     description:
-      "A multi-agent AI system for brain MRI scan analysis combining computer vision classification, retrieval-augmented diagnostic reporting, independent self-verification, and deterministic triage routing orchestrated end-to-end with LangGraph.",
+      "A multi-agent AI system for brain MRI scan analysis combining computer vision classification, retrieval-augmented reporting, self-verification critique, and deterministic triage routing orchestrated with LangGraph.",
     keyPoints: [
-      "Orchestrated with LangGraph state machines: CV feature extraction -> RAG report generation -> verification agent -> deterministic clinical triage.",
-      "Employs self-verification critique loops to cross-check image feature findings against clinical literature before finalizing reports.",
-      "Strict research prototype invariants clearly demarcating medical prototype boundaries.",
+      "Orchestrates multi-agent state machines with LangGraph: CV extraction -> RAG reporting -> self-verification -> clinical triage.",
+      "Self-verification critique loops cross-examine extracted visual anomalies against medical knowledge bases before finalizing reports.",
+      "Deterministic clinical triage routes urgent cases to neurosurgeons while flagging low-confidence predictions.",
+    ],
+    metrics: [
+      { label: "Orchestration", value: "LangGraph", note: "State Machine Graph" },
+      { label: "Pipeline", value: "Agentic RAG", note: "Vision + Verification + Triage" },
     ],
     techStack: ["LangGraph", "PyTorch", "FastAPI", "React", "Vector DB", "Medical Imaging"],
     architectureType: "agentic",
@@ -268,45 +307,50 @@ export const SECONDARY_PROJECTS: Project[] = [
     id: "ugc-ad-studio",
     number: "06",
     title: "UGC Ad Studio",
-    subtitle: "AI-Native Creative Video & Ad Generation Platform",
-    category: "Generative AI / Production Tools",
-    filterCategories: ["AI / ML", "Full Stack"],
+    subtitle: "AI-Native Creative Video & Ad Production Platform",
+    categories: ["LLM, RAG & AI Agents", "AI Products & Full-Stack Applications"],
     githubUrl: "https://github.com/djcode0718/UGC-Ad-Studio",
     description:
-      "An AI-native creative platform transforming simple product briefs into complete short-form ad creatives: viral hooks, 30-second scripts, shot-by-shot storyboards, and cinematic scene prompts optimized for TikTok, Instagram Reels, and YouTube Shorts.",
+      "An AI-native creative production platform that transforms simple product briefs into complete short-form ad creatives: viral hooks, 30-second scripts, shot-by-shot storyboards, and cinematic scene prompts.",
     keyPoints: [
-      "Generates viral hooks, complete timing breakdowns, and cinematic scene-by-scene prompts in seconds.",
-      "Cinematic dark UI engineered for rapid iterative creative workflows.",
-      "Structured prompt chaining ensures brand tone consistency across multi-modal creative outputs.",
+      "Generates viral hooks, complete script timing breakdowns, and cinematic scene-by-scene prompts in seconds.",
+      "Cinematic dark UI optimized for rapid iterative creative workflows across TikTok, Reels, and YouTube Shorts.",
+      "Structured prompt chaining guarantees consistent brand tone and scene pacing.",
+    ],
+    metrics: [
+      { label: "Target Formats", value: "3 Channels", note: "TikTok, Reels & Shorts" },
+      { label: "Generation Speed", value: "< 5s", note: "End-to-end creative brief output" },
     ],
     techStack: ["Next.js", "TypeScript", "Tailwind CSS", "LLM APIs", "FastAPI"],
-    architectureType: "standard",
+    architectureType: "rag-pipeline",
   },
   {
     id: "comic-spoiler-web",
     number: "07",
     title: "ComicSpoilerApp — Web",
     subtitle: "Multimodal Comic Panel Spoiler & Entity Analyzer",
-    category: "Computer Vision / NLP",
-    filterCategories: ["AI / ML", "Full Stack"],
+    categories: ["Computer Vision & Applied ML", "AI Products & Full-Stack Applications"],
     githubUrl: "https://github.com/djcode0718/ComicSpoilerDetectionWebApp",
     description:
-      "A full-stack comic panel analysis system. Upload an image panel to detect whether it contains narrative spoilers, determine comic genre, generate panel captions, and count unique character faces using hybrid vision + NLP inference.",
+      "A modular FastAPI + React web application analyzing uploaded comic panel images to predict spoiler probability, identify genres, generate captions, and count unique character faces using hybrid vision + NLP.",
     keyPoints: [
       "FastAPI + React architecture with JWT authentication stored in httpOnly cookies.",
       "Integrated drag-and-drop panel uploads with live preview and guest mode exploration.",
-      "Hybrid inference pipeline uniting OCR bubble parsing and computer vision face clustering.",
+      "Hybrid inference pipeline uniting OCR text bubble extraction and computer vision character clustering.",
+    ],
+    metrics: [
+      { label: "Inference", value: "Hybrid", note: "Computer Vision + NLP OCR" },
+      { label: "Auth", value: "JWT", note: "Secure httpOnly cookie sessions" },
     ],
     techStack: ["FastAPI", "React", "PyTorch", "JWT Auth", "Computer Vision", "NLP"],
-    architectureType: "standard",
+    architectureType: "vision-nlp",
   },
   {
     id: "comic-spoiler-mobile",
     number: "08",
     title: "ComicSpoilerApp — Mobile",
-    subtitle: "Cross-Platform Mobile Interface for Spoiler Detection",
-    category: "Mobile Engineering",
-    filterCategories: ["Full Stack"],
+    subtitle: "Cross-Platform Mobile Client for Comic ML Engine",
+    categories: ["AI Products & Full-Stack Applications"],
     githubUrl: "https://github.com/djcode0718/ComicSpoilerDetectionMobileApp",
     description:
       "A Flutter mobile application providing an intuitive on-the-go interface for the ComicSpoiler ML backend. Enables mobile photo capture, gallery uploads, and real-time inference result display.",
@@ -315,16 +359,19 @@ export const SECONDARY_PROJECTS: Project[] = [
       "Asynchronous network layer with retry handling and upload progress indicators.",
       "Clean UI displaying spoiler risk percentages and annotated character detections.",
     ],
+    metrics: [
+      { label: "Framework", value: "Flutter", note: "Dart Cross-Platform Mobile" },
+      { label: "Connection", value: "REST API", note: "Asynchronous backend bridge" },
+    ],
     techStack: ["Flutter", "Dart", "REST API", "Mobile UX", "State Management"],
-    architectureType: "standard",
+    architectureType: "mobile",
   },
   {
     id: "insurance-llm",
     number: "09",
     title: "Insurance LLM Assistant",
     subtitle: "Policy Reasoning & Automated Claim Adjudication",
-    category: "LLM Systems / FinTech",
-    filterCategories: ["AI / ML", "LLM & RAG"],
+    categories: ["LLM, RAG & AI Agents"],
     githubUrl: "https://github.com/djcode0718/Insurance-llm-project",
     description:
       "An automated claim evaluation assistant that ingests natural language patient queries, retrieves relevant policy clauses using vector similarity, and reasons over them with a local LLaMA 3 model to return structured decisions with clause justifications.",
@@ -333,16 +380,19 @@ export const SECONDARY_PROJECTS: Project[] = [
       "Runs local LLaMA 3 via Ollama for zero-cloud data leak compliance.",
       "Generates deterministic structured outputs: approval verdict, approved payout amount, and exact clause citations.",
     ],
+    metrics: [
+      { label: "Model", value: "LLaMA 3", note: "Local Ollama Inference" },
+      { label: "Output", value: "Deterministic", note: "Verdict, Amount & Policy Clauses" },
+    ],
     techStack: ["Python", "LLaMA 3", "Ollama", "Vector DB", "RAG", "Prompt Engineering"],
-    architectureType: "standard",
+    architectureType: "rag-pipeline",
   },
   {
     id: "razorpay-recoveriq",
     number: "10",
     title: "RecoverIQ (Razorpay)",
     subtitle: "Autonomous Revenue Recovery Command Center",
-    category: "Fintech / Payment Systems",
-    filterCategories: ["Full Stack", "AI / ML"],
+    categories: ["AI Products & Full-Stack Applications"],
     githubUrl: "https://github.com/djcode0718/RazorpayRecoverIQ",
     description:
       "Built for the Razorpay Buildathon (Track 03: Autonomous Revenue Recovery & Payment Resilience). An autonomous, policy-bounded engine engineered to recover failed subscription and checkout transactions through intelligent retries and risk scoring.",
@@ -351,8 +401,12 @@ export const SECONDARY_PROJECTS: Project[] = [
       "Policy-bounded recovery algorithms optimizing retry schedules against bank failure code semantics.",
       "Interactive real-time telemetry command dashboard monitoring recovered revenue and recovery velocity.",
     ],
+    metrics: [
+      { label: "Platform", value: "RecoverIQ", note: "Razorpay Buildathon Track 03" },
+      { label: "Backend", value: "FastAPI", note: "Policy-Bounded Retry Engine" },
+    ],
     techStack: ["FastAPI", "React", "TypeScript", "Vite", "Tailwind CSS", "Razorpay APIs"],
-    architectureType: "standard",
+    architectureType: "fintech",
   },
 ];
 
@@ -459,36 +513,5 @@ export const ACHIEVEMENTS: AchievementItem[] = [
     highlight: "School Sports Captain (25+ Medals)",
     description:
       "Elected School Sports Captain; won 25+ competitive medals across track and inter-school sports championships, cultivating rigorous discipline and team leadership.",
-  },
-];
-
-export const CODING_PROFILES = [
-  {
-    name: "GitHub",
-    handle: "@djcode0718",
-    url: "https://github.com/djcode0718",
-    stats: "10+ Public Projects • Open Source Repositories",
-    badge: "Code",
-  },
-  {
-    name: "LeetCode",
-    handle: "sj0718",
-    url: "https://leetcode.com/u/sj0718/",
-    stats: "250+ Solved • Data Structures & Algorithms",
-    badge: "Algorithms",
-  },
-  {
-    name: "HackerRank",
-    handle: "23211a66f8",
-    url: "https://www.hackerrank.com/profile/23211a66f8",
-    stats: "Verified Problem Solving & Core Foundations",
-    badge: "Foundations",
-  },
-  {
-    name: "LinkedIn",
-    handle: "sreevedh-jella",
-    url: "https://www.linkedin.com/in/sreevedh-jella",
-    stats: "Professional Network & Engineering Updates",
-    badge: "Network",
   },
 ];

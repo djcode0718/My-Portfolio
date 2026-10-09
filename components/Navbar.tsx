@@ -18,7 +18,7 @@ export default function Navbar({ onOpenCommandPalette }: NavbarProps) {
     const handleScroll = () => {
       setScrolled(window.scrollY > 40);
 
-      const sections = ["about", "projects", "experience", "skills", "research", "contact"];
+      const sections = ["flagship", "projects", "about", "experience", "skills", "research", "contact"];
       const scrollPosition = window.scrollY + 200;
 
       for (const section of sections) {
@@ -39,7 +39,7 @@ export default function Navbar({ onOpenCommandPalette }: NavbarProps) {
   }, []);
 
   const navLinks = [
-    { name: "About", href: "#about", id: "about" },
+    { name: "Flagships", href: "#flagship", id: "flagship" },
     { name: "Projects", href: "#projects", id: "projects" },
     { name: "Experience", href: "#experience", id: "experience" },
     { name: "Skills", href: "#skills", id: "skills" },
