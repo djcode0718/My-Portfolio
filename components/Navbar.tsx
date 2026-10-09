@@ -17,33 +17,62 @@ export default function Navbar({ onOpenCommandPalette }: NavbarProps) {
     const handleScroll = () => {
       setScrolled(window.scrollY > 30);
 
-      const sections = ["projects", "skills", "experience", "research", "contact"];
-      const scrollPosition = window.scrollY + 180;
+      // Bottom of page check for contact
+      if (
+        window.innerHeight + window.scrollY >=
+        document.documentElement.scrollHeight - 100
+      ) {
+        setActiveSection("contact");
+        return;
+      }
 
-      for (const section of sections) {
-        const el = document.getElementById(section);
-        if (el) {
-          const top = el.offsetTop;
-          const height = el.offsetHeight;
-          if (scrollPosition >= top && scrollPosition < top + height) {
-            setActiveSection(section);
-            break;
-          }
+      // Sections in bottom-to-top document order for accurate scroll-spy
+      const spySections = [
+        { id: "contact", navId: "contact" },
+        { id: "research", navId: "research" },
+        { id: "experience", navId: "experience" },
+        { id: "all-projects", navId: "projects" },
+        { id: "projects", navId: "projects" },
+        { id: "skills", navId: "skills" },
+      ];
+
+      const scrollPosition = window.scrollY + 200;
+
+      for (const section of spySections) {
+        const el = document.getElementById(section.id);
+        if (el && scrollPosition >= el.offsetTop) {
+          setActiveSection(section.navId);
+          return;
         }
       }
+
+      // In hero or above first section
+      setActiveSection("");
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Required Navigation Order: Skills -> Projects -> Experience -> Research -> Contact
   const navLinks = [
-    { name: "Projects", href: "#projects", id: "projects" },
     { name: "Skills", href: "#skills", id: "skills" },
+    { name: "Projects", href: "#projects", id: "projects" },
     { name: "Experience", href: "#experience", id: "experience" },
     { name: "Research", href: "#research", id: "research" },
     { name: "Contact", href: "#contact", id: "contact" },
   ];
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string, id: string) => {
+    e.preventDefault();
+    setMobileMenuOpen(false);
+    const target = document.querySelector(href);
+    if (target) {
+      target.scrollIntoView({ behavior: "smooth" });
+      setActiveSection(id);
+    }
+  };
 
   return (
     <header
@@ -70,12 +99,13 @@ export default function Navbar({ onOpenCommandPalette }: NavbarProps) {
           </div>
         </a>
 
-        {/* Desktop Nav */}
+        {/* Desktop Nav: Skills -> Projects -> Experience -> Research -> Contact */}
         <nav className="hidden md:flex items-center gap-1 bg-[#121419]/90 border border-white/[0.08] px-3 py-1 rounded-full">
           {navLinks.map((link) => (
             <a
               key={link.id}
               href={link.href}
+              onClick={(e) => handleNavClick(e, link.href, link.id)}
               className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
                 activeSection === link.id
                   ? "bg-[#C5FF4A] text-[#0C0D10] font-semibold"
@@ -129,7 +159,7 @@ export default function Navbar({ onOpenCommandPalette }: NavbarProps) {
         </div>
       </div>
 
-      {/* Mobile Menu Dropdown */}
+      {/* Mobile Menu Dropdown: Skills -> Projects -> Experience -> Research -> Contact */}
       {mobileMenuOpen && (
         <div className="md:hidden bg-[#0C0D10]/98 border-b border-white/10 px-4 pt-3 pb-5 space-y-3">
           <div className="grid grid-cols-2 gap-2">
@@ -137,8 +167,8 @@ export default function Navbar({ onOpenCommandPalette }: NavbarProps) {
               <a
                 key={link.id}
                 href={link.href}
-                onClick={() => setMobileMenuOpen(false)}
-                className={`px-3 py-2 rounded-lg text-xs font-medium ${
+                onClick={(e) => handleNavClick(e, link.href, link.id)}
+                className={`px-3 py-2 rounded-lg text-xs font-medium text-center ${
                   activeSection === link.id
                     ? "bg-[#C5FF4A] text-[#0C0D10] font-bold"
                     : "bg-[#121419] text-[#9DA3AF] hover:text-white"

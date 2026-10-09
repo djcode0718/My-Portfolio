@@ -14,6 +14,7 @@ import {
   Briefcase,
   GraduationCap,
   Sparkles,
+  Mail,
 } from "lucide-react";
 import { PERSONAL_INFO, FLAGSHIP_PROJECTS, SECONDARY_PROJECTS } from "@/data/portfolio-data";
 
@@ -61,21 +62,21 @@ export default function CommandPalette({
   const allProjectsList = [...FLAGSHIP_PROJECTS, ...SECONDARY_PROJECTS];
 
   const items = [
-    // Navigation
+    // Navigation (Skills -> Projects -> Experience -> Research -> Contact)
     {
-      id: "nav-flagship",
+      id: "nav-skills",
       category: "Navigation",
-      title: "Jump to Flagship Case Studies",
-      icon: FolderGit2,
+      title: "Jump to Technical Skills & Stack",
+      icon: Code2,
       action: () => {
-        document.getElementById("flagship")?.scrollIntoView({ behavior: "smooth" });
+        document.getElementById("skills")?.scrollIntoView({ behavior: "smooth" });
         onClose();
       },
     },
     {
       id: "nav-projects",
       category: "Navigation",
-      title: "Jump to Categorized Projects",
+      title: "Jump to Projects & Case Studies",
       icon: FolderGit2,
       action: () => {
         document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
@@ -83,32 +84,12 @@ export default function CommandPalette({
       },
     },
     {
-      id: "nav-about",
-      category: "Navigation",
-      title: "Jump to About Section",
-      icon: GraduationCap,
-      action: () => {
-        document.getElementById("about")?.scrollIntoView({ behavior: "smooth" });
-        onClose();
-      },
-    },
-    {
       id: "nav-experience",
       category: "Navigation",
-      title: "Jump to Experience (Segritech)",
+      title: "Jump to Experience & Honors",
       icon: Briefcase,
       action: () => {
         document.getElementById("experience")?.scrollIntoView({ behavior: "smooth" });
-        onClose();
-      },
-    },
-    {
-      id: "nav-skills",
-      category: "Navigation",
-      title: "Jump to Skills & Toolkit",
-      icon: Code2,
-      action: () => {
-        document.getElementById("skills")?.scrollIntoView({ behavior: "smooth" });
         onClose();
       },
     },
@@ -122,6 +103,16 @@ export default function CommandPalette({
         onClose();
       },
     },
+    {
+      id: "nav-contact",
+      category: "Navigation",
+      title: "Jump to Contact & Connect",
+      icon: Mail,
+      action: () => {
+        document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+        onClose();
+      },
+    },
     // Projects
     ...allProjectsList.map((proj) => ({
       id: `proj-${proj.id}`,
@@ -132,7 +123,7 @@ export default function CommandPalette({
         if (onSelectProject) {
           onSelectProject(proj.id);
         } else {
-          document.getElementById(proj.id === "codebase-copilot" || proj.id === "mediscan-ai" ? "flagship" : "projects")?.scrollIntoView({ behavior: "smooth" });
+          document.getElementById(proj.id === "codebase-copilot" || proj.id === "mediscan-ai" ? "projects" : "all-projects")?.scrollIntoView({ behavior: "smooth" });
         }
         onClose();
       },

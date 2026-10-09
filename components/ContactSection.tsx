@@ -29,7 +29,7 @@ export default function ContactSection() {
   const prefilledMailto = `mailto:${PERSONAL_INFO.email}?subject=${encodeURIComponent(
     "AI/ML Engineering Role — Sreevedh Jella"
   )}&body=${encodeURIComponent(
-    "Hi Sreevedh,\n\nI reviewed your portfolio and project case studies (MediScanAI, CodeBase-Copilot, RecoverIQ, Sound2Sign). I'd like to discuss an engineering role with our team.\n\nBest regards,"
+    "Hi Sreevedh,\n\nI reviewed your portfolio and project case studies (CodeBase-Copilot, MediScanAI, RecoverIQ, Sound2Sign). I'd like to discuss an engineering role with our team.\n\nBest regards,"
   )}`;
 
   return (

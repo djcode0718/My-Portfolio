@@ -44,7 +44,7 @@ export default function Home() {
       {/* 3. Technical Toolkit: Positioned Immediately Near the Top for Rapid 5-Second Scanning */}
       <SkillsSection />
 
-      {/* 4. Flagship Case Studies: Compact, High-Impact MediScanAI & CodeBase-Copilot */}
+      {/* 4. Flagship Case Studies: Compact, High-Impact CodeBase-Copilot & MediScanAI */}
       <FlagshipShowcase onSelectProject={(project) => setSelectedProject(project)} />
 
       {/* 5. Complete Ranked Portfolio: Instant Multi-Tagged Filtering (RazorpayRecoverIQ Ranked #1) */}

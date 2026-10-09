@@ -32,12 +32,17 @@ export default function CategorizedProjectsSection({
     return proj.categories.includes(selectedCategory);
   });
 
+  const getCategoryCount = (cat: ProjectCategory) => {
+    if (cat === "All Projects") return SECONDARY_PROJECTS.length;
+    return SECONDARY_PROJECTS.filter((p) => p.categories.includes(cat)).length;
+  };
+
   return (
-    <section className="py-14 sm:py-16 bg-[#0C0D10] border-b border-white/[0.08]">
+    <section id="all-projects" className="py-12 sm:py-14 bg-[#0C0D10] border-b border-white/[0.08]">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         
         {/* Section Header */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between pb-4 mb-6 border-b border-white/[0.08] gap-2">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between pb-3.5 mb-6 border-b border-white/[0.08] gap-2">
           <div>
             <div className="font-mono text-xs text-[#C5FF4A] tracking-widest uppercase mb-1">
               // 03. COMPLETE PROJECT PORTFOLIO
@@ -52,23 +57,31 @@ export default function CategorizedProjectsSection({
         </div>
 
         {/* Filter Controls Directly Above Grid */}
-        <div className="mb-6 p-2 sm:p-2.5 rounded-xl bg-[#121419] border border-white/[0.08] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+        <div className="mb-6 p-2 rounded-xl bg-[#121419] border border-white/[0.08] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
           
-          {/* Category Tabs (horizontal scroll on mobile) */}
+          {/* Category Tabs */}
           <div className="flex items-center gap-1.5 overflow-x-auto w-full sm:w-auto pb-1 sm:pb-0 scrollbar-none">
             {PROJECT_CATEGORIES.map((category) => {
               const isActive = selectedCategory === category;
+              const count = getCategoryCount(category);
               return (
                 <button
                   key={category}
                   onClick={() => setSelectedCategory(category)}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-mono whitespace-nowrap transition-all ${
+                  className={`px-3 py-1.5 rounded-lg text-xs font-mono whitespace-nowrap transition-all flex items-center gap-1.5 ${
                     isActive
                       ? "bg-[#C5FF4A] text-[#0C0D10] font-bold shadow-sm"
                       : "bg-[#0C0D10] text-[#9DA3AF] hover:text-white hover:bg-white/[0.04] border border-white/5"
                   }`}
                 >
-                  {category}
+                  <span>{category}</span>
+                  <span
+                    className={`text-[10px] px-1 py-0.2 rounded font-mono ${
+                      isActive ? "bg-[#0C0D10]/20 text-[#0C0D10]" : "bg-white/5 text-[#9DA3AF]"
+                    }`}
+                  >
+                    {count}
+                  </span>
                 </button>
               );
             })}
@@ -83,7 +96,7 @@ export default function CategorizedProjectsSection({
               <button
                 onClick={() => setSelectedCategory("All Projects")}
                 className="p-1 rounded bg-[#181B22] text-[#9DA3AF] hover:text-white transition-colors"
-                title="Reset filter"
+                title="Reset filter to All Projects"
               >
                 <RotateCcw className="w-3.5 h-3.5" />
               </button>
@@ -93,7 +106,7 @@ export default function CategorizedProjectsSection({
 
         {/* Compact Grid of Ranked Secondary Projects */}
         {filteredProjects.length === 0 ? (
-          <div className="py-16 text-center rounded-xl bg-[#121419] border border-white/[0.08] space-y-3">
+          <div className="py-14 text-center rounded-xl bg-[#121419] border border-white/[0.08] space-y-3">
             <p className="text-sm text-[#9DA3AF] font-mono">
               No projects found in category &ldquo;{selectedCategory}&rdquo;.
             </p>
@@ -105,11 +118,11 @@ export default function CategorizedProjectsSection({
             </button>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
             {filteredProjects.map((project) => (
               <div
                 key={project.id}
-                className="p-5 sm:p-6 rounded-xl bg-[#121419] border border-white/[0.07] hover:border-[#C5FF4A]/40 transition-all duration-200 flex flex-col justify-between"
+                className="p-5 rounded-xl bg-[#121419] border border-white/[0.07] hover:border-[#C5FF4A]/40 transition-all duration-200 flex flex-col justify-between group"
               >
                 {/* Header Information */}
                 <div className="space-y-3">
@@ -145,7 +158,10 @@ export default function CategorizedProjectsSection({
 
                   {/* Title & Subtitle */}
                   <div>
-                    <h3 className="font-display font-bold text-xl text-white hover:text-[#C5FF4A] transition-colors">
+                    <h3
+                      onClick={() => onSelectProject(project)}
+                      className="font-display font-bold text-lg sm:text-xl text-white group-hover:text-[#C5FF4A] transition-colors cursor-pointer"
+                    >
                       {project.title}
                     </h3>
                     <div className="font-mono text-xs text-[#9DA3AF] mt-0.5">
@@ -172,7 +188,7 @@ export default function CategorizedProjectsSection({
                 </div>
 
                 {/* Footer with tech tags and links */}
-                <div className="pt-4 mt-4 border-t border-white/[0.06] space-y-2.5">
+                <div className="pt-3.5 mt-3.5 border-t border-white/[0.06] space-y-2.5">
                   <div className="flex flex-wrap gap-1.5">
                     {project.techStack.map((tech, idx) => (
                       <span
@@ -189,7 +205,7 @@ export default function CategorizedProjectsSection({
                       onClick={() => onSelectProject(project)}
                       className="inline-flex items-center gap-1 text-xs font-semibold text-white hover:text-[#C5FF4A] transition-colors"
                     >
-                      <span>System Specs</span>
+                      <span>System Architecture</span>
                       <ArrowUpRight className="w-3.5 h-3.5 text-[#C5FF4A]" />
                     </button>
 
@@ -199,7 +215,7 @@ export default function CategorizedProjectsSection({
                           href={project.paperUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="p-1.5 rounded bg-[#181B22] hover:bg-blue-500/20 text-blue-400 border border-white/10"
+                          className="p-1.5 rounded bg-[#181B22] hover:bg-blue-500/20 text-blue-400 border border-white/10 transition-colors"
                           title="IEEE Xplore Paper (DOI)"
                         >
                           <Sparkles className="w-3.5 h-3.5" />
